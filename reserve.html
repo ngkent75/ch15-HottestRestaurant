@@ -91,7 +91,7 @@
           uniqueID: parseInt(resID)
         };
 
-        fetch('/api/characters', {
+        fetch('/api/tables', {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
@@ -100,7 +100,6 @@
         })
           .then((response) => response.json())
           .then((data) => {
-            console.log('add.html', data);
             alert(`Adding table: ${data.name}`);
           })
           .catch((error) => {
