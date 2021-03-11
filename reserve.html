@@ -79,16 +79,16 @@
       addBtn.addEventListener('click', (e) => {
         e.preventDefault();
 
-        let charName = document.getElementById('name').value.trim();
-        let charRole = document.getElementById('role').value.trim();
-        let charAge = document.getElementById('age').value.trim();
-        let charFp = document.getElementById('force-points').value.trim();
+        let resName = document.getElementById('name').value.trim();
+        let resPhone = document.getElementById('phone').value.trim();
+        let resEmail = document.getElementById('email').value.trim();
+        let resID = document.getElementById('uniqueID').value.trim();
         
-        let newCharacter = {
-          name: charName,
-          role: charRole,
-          age: parseInt(charAge),
-          forcePoints: parseInt(charFp),
+        let newTable = {
+          name: resName,
+          phone: resPhone,
+          email: resEmail,
+          uniqueID: parseInt(resID)
         };
 
         fetch('/api/characters', {
@@ -96,12 +96,12 @@
           headers: {
             'Content-Type': 'application/json',
           },
-          body: JSON.stringify(newCharacter),
+          body: JSON.stringify(newTable),
         })
           .then((response) => response.json())
           .then((data) => {
             console.log('add.html', data);
-            alert(`Adding character: ${data.name}`);
+            alert(`Adding table: ${data.name}`);
           })
           .catch((error) => {
             console.error('Error:', error);
