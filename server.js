@@ -73,6 +73,12 @@ app.post('/api/waitlist', (req, res) => {
   res.json(newReservation);
 });
 
+app.post('/api/clear', (req, res) => {
+  tables.length = 0;
+  waitlist.length = 0;
+
+  res.json("Empty");
+});
 
 
 console.log(__dirname)
