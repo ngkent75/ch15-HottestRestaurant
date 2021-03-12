@@ -18,8 +18,8 @@
       <h1 class="text-center">Hot Restaurant</h1>
       <h2 class="text-center">Current Reservations and Waiting List</h2>
       <div class="text-center">
-        <a href="/reserve"><button class="btn btn-lg btn-default" id="resButton">Make Reservation</button></a>
-        <a href="/"><button class="btn btn-lg btn-default" id="homeButton">Home</button></a>
+        <a href="/reserve"><button class="btn btn-lg btn-default btn-danger mr-2" id="resButton">Make Reservation</button></a>
+        <a href="/"><button class="btn btn-lg btn-default btn-danger ml-2" id="homeButton">Home</button></a>
       </div>
     </div>
     <div class="row">
@@ -57,7 +57,7 @@
         for (var i = 0; i < data.length; i++) {
           var currentTables = $('#currentTables')
           currentTables.append(
-            `<li class='list-group-item'>
+            `<li class='list-group-item mt-2'>
         <h2> Table # ${i + 1} </h2>
         <h2> ID: ${data[i].uniqueID} </h2>
         <h2> Name: ${data[i].name} </h2>

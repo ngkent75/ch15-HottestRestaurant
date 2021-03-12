@@ -48,7 +48,6 @@ app.post('/api/waitlist', (req, res) => {
 
 app.get('/api/waitlist', (req, res) => res.json(reservations));
 
-// Displays a single character, or returns false
 app.get('/api/reservations/:reservation', (req, res) => {
   const chosen = req.params.reservation;
 
@@ -64,14 +63,9 @@ app.get('/api/reservations/:reservation', (req, res) => {
   return res.json(false);
 });
 
-// Create New reservations - takes in JSON input
 app.post('/api/waitlist', (req, res) => {
-  // req.body hosts is equal to the JSON post sent from the user
-  // This works because of our body parsing middleware
   const newReservation = req.body;
 
-  // Using a RegEx Pattern to remove spaces from newreservation
-  // You can read more about RegEx Patterns later https://www.regexbuddy.com/regex.html
   newReservation.routeName = newReservation.name.replace(/\s+/g, '').toLowerCase();
   console.log(newReservation);
 
