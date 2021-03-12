@@ -20,7 +20,8 @@ const tables = [];
 
 // Basic route that sends the user first to the AJAX Page+git pull
 app.get('/', (req, res) => res.sendFile(path.join(__dirname, 'view.html')));
-app.get('/add', (req, res) => res.sendFile(path.join(__dirname, 'add.html')));
+app.get('/tables', (req, res) => res.sendFile(path.join(__dirname, 'tables.html')));
+app.get('/reserve', (req, res) => res.sendFile(path.join(__dirname, 'reserve.html')));
 
 // Displays all tables
 app.get('/api/tables', (req, res) => res.json(tables));
@@ -67,7 +68,8 @@ const reservations = [];
 
 // Basic route that sends the user first to the AJAX Page+git pull
 app.get('/', (req, res) => res.sendFile(path.join(__dirname, 'view.html')));
-app.get('/add', (req, res) => res.sendFile(path.join(__dirname, 'add.html')));
+app.get('/tables', (req, res) => res.sendFile(path.join(__dirname, 'tables.html')));
+app.get('/reserve', (req, res) => res.sendFile(path.join(__dirname, 'reserve.html')));
 
 // Displays all reservations
 app.get('/api/reservations', (req, res) => res.json(reservations));
@@ -105,5 +107,9 @@ app.post('/api/reservations', (req, res) => {
   reservations.push(newReservation);
   res.json(newReservation);
 });
+
+
+
+console.log(__dirname)
 
 app.listen(PORT, () => console.log(`App listening on PORT ${PORT}`));
