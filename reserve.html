@@ -87,7 +87,7 @@
         name: resName,
         phone: resPhone,
         email: resEmail,
-        uniqueID: parseInt(resID)
+        uniqueID: resID
       };
       fetch('/api/tables', {
         method: 'GET',
@@ -97,7 +97,7 @@
       })
         .then((response) => response.json())
         .then((data) => {
-          if (data.length < 4) {
+          if (data.length < 5) {
             fetch('/api/tables', {
               method: 'POST',
               headers: {
