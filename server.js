@@ -12,8 +12,7 @@ const PORT = 3000;
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
-// Star Wars tables (DATA)
-
+//WE PROBABLY NEED RESERVE ARRAY TOO!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 const tables = [];
 
 // Routes
@@ -62,7 +61,7 @@ app.post('/api/tables', (req, res) => {
 
 // Starts the server to begin listening
 
-const reservations = [];
+const waitlist = [];
 
 // Routes
 
@@ -94,7 +93,7 @@ app.get('/api/reservations/:reservation', (req, res) => {
 });
 
 // Create New reservations - takes in JSON input
-app.post('/api/reservations', (req, res) => {
+app.post('/api/waitlist', (req, res) => {
   // req.body hosts is equal to the JSON post sent from the user
   // This works because of our body parsing middleware
   const newReservation = req.body;
@@ -102,9 +101,9 @@ app.post('/api/reservations', (req, res) => {
   // Using a RegEx Pattern to remove spaces from newreservation
   // You can read more about RegEx Patterns later https://www.regexbuddy.com/regex.html
   newReservation.routeName = newReservation.name.replace(/\s+/g, '').toLowerCase();
-  console.log(newreservation);
+  console.log(newReservation);
 
-  reservations.push(newReservation);
+  waitlist.push(newReservation);
   res.json(newReservation);
 });
 
