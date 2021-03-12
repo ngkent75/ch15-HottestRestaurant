@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -10,14 +11,15 @@
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
   <title>Tables Page</title>
 </head>
+
 <body>
   <div class="container">
     <div class="jumbotron">
       <h1 class="text-center">Hot Restaurant</h1>
       <h2 class="text-center">Current Reservations and Waiting List</h2>
       <div class="text-center">
-        <a href="/reserve"><button class="btn btn-lg btn-default">Make Reservation</button></a>
-        <a href="/"><button class="btn btn-lg btn-default">Home</button></a>
+        <a href="/reserve"><button class="btn btn-lg btn-default" id="resButton">Make Reservation</button></a>
+        <a href="/"><button class="btn btn-lg btn-default" id="homeButton">Home</button></a>
       </div>
     </div>
     <div class="row">
@@ -41,6 +43,59 @@
       </div>
     </div>
   </div>
-  
+
+
+  <script type="text/javascript">
+    fetch('/api/tables', {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        for (var i = 0; i < data.length; i++) {
+          var currentTables = $('#currentTables')
+          currentTables.append(
+            `<li class='list-group-item'>
+        <h2> Table # ${i + 1} </h2>
+        <h2> ID: ${data[i].uniqueID} </h2>
+        <h2> Name: ${data[i].name} </h2>
+        <h2> Email: ${data[i].email} </h2>
+        <h2> Phone #: ${data[i].phone} </h2>
+        </li>`
+          )
+        }
+      })
+      .catch((error) => {
+        console.error('Error:', error);
+      });
+    fetch('/api/waitlist', {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        for (var i = 0; i < data.length; i++) {
+          var waitList = $('#waitList')
+          waitList.append(
+            `<li class='list-group-item'>
+        <h2> Table # ${i + 1} </h2>
+        <h2> ID: ${data[i].uniqueID} </h2>
+        <h2> Name: ${data[i].name} </h2>
+        <h2> Email: ${data[i].email} </h2>
+        <h2> Phone #: ${data[i].phone} </h2>
+        </li>`
+          )
+        }
+      })
+      .catch((error) => {
+        console.error('Error:', error);
+      });
+  </script>
+
 </body>
+
 </html>
