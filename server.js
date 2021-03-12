@@ -14,6 +14,7 @@ app.use(express.json());
 
 //WE PROBABLY NEED RESERVE ARRAY TOO!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 const tables = [];
+const waitlist = [];
 
 // Routes
 
@@ -27,7 +28,7 @@ app.get('/api/tables', (req, res) => res.json(tables));
 
 // Displays a single character, or returns false
 app.get('/api/tables/:reservation', (req, res) => {
-  const chosen = req.params.reservation;
+  const chosen = req.params.waitlist;
 
   console.log(chosen);
 
@@ -61,7 +62,6 @@ app.post('/api/tables', (req, res) => {
 
 // Starts the server to begin listening
 
-const waitlist = [];
 
 // Routes
 
