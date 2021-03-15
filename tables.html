@@ -15,11 +15,14 @@
 <body>
   <div class="container">
     <div class="jumbotron">
-      <h1 class="text-center">Hot Restaurant</h1>
+      <h1 class="text-center"><span class="fa fa-fire text-danger mr-2"></span>Hot Restaurant</h1>
       <h2 class="text-center">Current Reservations and Waiting List</h2>
+      <hr />
       <div class="text-center">
-        <a href="/reserve"><button class="btn btn-lg btn-default btn-danger mr-2" id="resButton">Make Reservation</button></a>
-        <a href="/"><button class="btn btn-lg btn-default btn-danger ml-2" id="homeButton">Home</button></a>
+        <a href="/reserve"><button class="btn btn-lg btn-default btn-danger mr-2" id="resButton">Make
+            Reservation</button></a>
+        <a href="/"><button class="btn btn-lg btn-default btn-danger ml-2" id="homeButton"><span
+              class="fa fa-home"></span></button></a>
       </div>
     </div>
     <div class="row">
@@ -43,57 +46,89 @@
       </div>
     </div>
   </div>
-
+  <footer class="footer">
+    <div class="container">
+      <p> <a href="#" id="clear">Clear Tables</a> |
+        <a href="/api/tables">API Table Link</a> | <a href="/api/waitlist">API Wait List</a>
+    </div>
+  </footer>
 
   <script type="text/javascript">
-    fetch('/api/tables', {
-      method: 'GET',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-    })
-      .then((response) => response.json())
-      .then((data) => {
-        for (var i = 0; i < data.length; i++) {
-          var currentTables = $('#currentTables')
-          currentTables.append(
-            `<li class='list-group-item mt-2'>
-        <h2> Table # ${i + 1} </h2>
-        <h2> ID: ${data[i].uniqueID} </h2>
-        <h2> Name: ${data[i].name} </h2>
-        <h2> Email: ${data[i].email} </h2>
-        <h2> Phone #: ${data[i].phone} </h2>
-        </li>`
-          )
-        }
+    const init = () => {
+      fetch('/api/tables', {
+        method: 'GET',
+        headers: {
+          'Content-Type': 'application/json',
+        },
       })
-      .catch((error) => {
-        console.error('Error:', error);
-      });
-    fetch('/api/waitlist', {
-      method: 'GET',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-    })
-      .then((response) => response.json())
-      .then((data) => {
-        for (var i = 0; i < data.length; i++) {
-          var waitList = $('#waitList')
-          waitList.append(
-            `<li class='list-group-item'>
-        <h2> Table # ${i + 1} </h2>
-        <h2> ID: ${data[i].uniqueID} </h2>
-        <h2> Name: ${data[i].name} </h2>
-        <h2> Email: ${data[i].email} </h2>
-        <h2> Phone #: ${data[i].phone} </h2>
-        </li>`
-          )
-        }
+        .then((response) => response.json())
+        .then((data) => {
+          for (var i = 0; i < data.length; i++) {
+            var currentTables = $('#currentTables')
+            currentTables.append(
+              `<li class='list-group-item mt-2'>
+            <h2> Table # ${i + 1} </h2>
+            <h2> ID: ${data[i].uniqueID} </h2>
+            <h2> Name: ${data[i].name} </h2>
+            <h2> Email: ${data[i].email} </h2>
+            <h2> Phone #: ${data[i].phone} </h2>
+            </li>`
+            )
+          }
+        })
+        .catch((error) => {
+          console.error('Error:', error);
+        });
+      fetch('/api/waitlist', {
+        method: 'GET',
+        headers: {
+          'Content-Type': 'application/json',
+        },
       })
-      .catch((error) => {
-        console.error('Error:', error);
-      });
+        .then((response) => response.json())
+        .then((data) => {
+          for (var i = 0; i < data.length; i++) {
+            var waitList = $('#waitList')
+            waitList.append(
+              `<li class='list-group-item'>
+                <h2> Table # ${i + 1} </h2>
+                <h2> ID: ${data[i].uniqueID} </h2>
+                <h2> Name: ${data[i].name} </h2>
+                <h2> Email: ${data[i].email} </h2>
+                <h2> Phone #: ${data[i].phone} </h2>
+                </li>`
+            )
+          }
+        })
+        .catch((error) => {
+          console.error('Error:', error);
+        });
+    }
+    const clearTable = () => {
+      alert('Clearing...');
+
+      fetch('/api/clear', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      })
+        .then((response) => response.json())
+        .then((data) => {
+         
+          location.reload();
+        })
+        .catch((error) => {
+          console.error('Error:', error);
+        });
+    };
+    
+      
+    init();
+
+    $('#clear').click(() => {
+      clearTable();
+    });
   </script>
 
 </body>
